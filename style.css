@@ -1,0 +1,58 @@
+h2 {
+  font-size: 40px;
+}
+
+.text-success {
+  color: green;
+  font-weight: bold;
+}
+
+.text-danger {
+  color: red;
+  font-weight: bold;
+}
+
+img {
+  width: 400px;
+  height: auto;
+}
+
+.logo {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+#submitbttn {
+  background-color: #E13649 !important;
+}
+
+.option {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+.register-info {
+  color: grey;
+}
+
+input:focus {
+  border-color: rgba(180, 43, 58, 0.6) !important;
+  box-shadow: 0 0.5px 0.5px rgba(229, 103, 23, 0.075) inset, 0 0 4px rgba(225, 54, 73, 0.5) !important;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#success, #error {
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  z-index: 1;
+  text-align: center;
+}
