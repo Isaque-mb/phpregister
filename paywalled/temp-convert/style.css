@@ -1,0 +1,76 @@
+body {
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* MAIN DIVS */
+.wrapper {
+  background: rgba(50, 75, 90, 0.7);
+  width: 99.95vw;
+  height: 99.9vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-family: monospace;
+  font-weight: lighter;
+}
+
+.feedback {
+  width: 99.7vw;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* END OF MAIN DIVS */
+.set1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+#conversion {
+  font-size: 40px;
+  color: white;
+}
+
+#error {
+  font-size: 40px;
+  color: #A93226;
+  font-weight: bold;
+}
+
+#thermometer {
+  width: 150px;
+  height: auto;
+}
+
+select {
+  cursor: pointer;
+}
+
+#unit2.option {
+  text-align: center;
+}
+
+input[type=number] {
+  width: 100%;
+  transition: width 1s;
+  transition-timing-function: ease;
+}
+
+input[type=number]:focus {
+  width: 60%;
+}

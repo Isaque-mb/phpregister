@@ -42,11 +42,23 @@ input:focus {
   box-shadow: 0 0.5px 0.5px rgba(229, 103, 23, 0.075) inset, 0 0 4px rgba(225, 54, 73, 0.5) !important;
 }
 
-.flex {
+.container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+}
+
+.flex {
+  height: 500px;
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 600px;
+  height: auto;
 }
 
 #success, #error {

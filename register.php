@@ -1,5 +1,5 @@
 <?php 
-declare(strict_types=1);
+include 'includes/config.php';
 $bFormSubmitted = isset($_POST['username']) && strlen($_POST['username']) > 0;
  ?>
 
@@ -14,7 +14,7 @@ $bFormSubmitted = isset($_POST['username']) && strlen($_POST['username']) > 0;
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/main.css">
   <title>Register</title>
 </head>
 
@@ -85,19 +85,45 @@ function validateForm():string{
 }
   
   
-
-
-  
-  
   return $errorMsg;
   
 }
 
+
   
    ?>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="login.php">Log In</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Member Content
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/paywalled/prime-fac/primeFac.php">Prime Factoring</a>
+          <a class="dropdown-item" href="/paywalled/temp-convert/tempConvert.php">Temp Converter</a>
+          <a class="dropdown-item" href="/paywalled/tip-calc/tipCalc.php">Tip Calculator</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="register.php">Account</a>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
   <div class="container">
 
-    <div class="wrapper-alert1">
+    <!-- <div class="wrapper-alert1">
       <div class="alert alert-danger" id="error" role="alert">
       </div>
     </div>
@@ -107,11 +133,11 @@ function validateForm():string{
       <div class="alert alert-success" id="success" role="alert">
         <h6>Proceeding ...</h6>
       </div>
-    </div>
+    </div> -->
 
 
     <div class="logo">
-      <img src="mobilleM.jpeg" class="img-fluid mt-2" alt="Marvin Logo">
+      <img src="images/mobilleM.jpeg" class="img-fluid mt-2" alt="Marvin Logo">
     </div>
 
     <div class="row">
@@ -208,33 +234,32 @@ function validateForm():string{
 
 
 
-    <span>Testing</span>
+    <!-- <span>Testing</span>
     <select class="form-go" id="regtester">
       <option value="unchosen">Chose an option</option>
       <option value="correct">All correct</option>
       <option value="uname_short">Uname too short</option>
-      <option value="pword_mismatch">Pword Mismatch</option>
+      <option value="pword_mismatch">Pword Mismatch</option> -->
       <!-- <option value="pword_short">Pword too short</option> -->
-      <option value="pword_schar">Pword no special charac.</option>
+      <!-- <option value="pword_schar">Pword no special charac.</option>
       <option value="pword_num">Pword no number</option>
       <option value="pword_up">Pword no UPPER</option>
       <option value="pword_low">Pword no lower</option>
       <option value="pword_uname">Pword w/ UNAME</option>
       <option value="not_at">Email no @</option>
       <option value="not_dot">Email no dot</option>
-      <option value="email_mismatch">Email mismatch</option>
+      <option value="email_mismatch">Email mismatch</option> -->
       <!-- <option value="too_young">Too young</option>
       <option value="too_old">Too old</option> -->
       <!-- <option value="no_gend">Unchosen gender</option> -->
-    </select>
+    <!-- </select> -->
 
   </div>
 
 
   </div>
 </body>
-<script src="scriptRegister.js">
-
+<script src="scriptRegister.js"> 
 </script>
 
 </html>
