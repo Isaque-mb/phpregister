@@ -1,6 +1,8 @@
 <?php 
 include 'includes/config.php';
+include 'includes/db.php';
 $bFormSubmitted = isset($_POST['username']) && strlen($_POST['username']) > 0;
+$debug = true;
  ?>
 
 <!DOCTYPE html>
@@ -26,6 +28,7 @@ $bFormSubmitted = isset($_POST['username']) && strlen($_POST['username']) > 0;
 function validateForm():string{
   
   global $debug;
+  global $mysqli;
   $errorMsg = '';
   $userName = 'Jane Doe';
   $age = 200;
@@ -33,6 +36,7 @@ function validateForm():string{
   $email2 = 'foo@foo.com';
   $pwd1 = 'foofoofoo';
   $pwd2 = 'foofoofoo';
+  $gender = $_POST['gender'];
   
   // username
   if (isset($_POST['username']) && strlen($_POST['username']) > 4)
@@ -83,44 +87,42 @@ function validateForm():string{
   echo '<br /> Your Pwd1 is '.$pwd1.'<br />';
   echo '<br /> Your Pwd2 is '.$pwd2.'<br />'; 
 }
+
+if(strlen($errorMsg)===0){
+$gender=$_POST['gender']    ;
+    /* $gender = $_POST['gender']; */
+/* $email = 'abc@' . strval(microtime()). '123.com'; */
+/* $password = "mypassword"; */
+/* $userName = "foobar"; */
+/* $age = 51; */
+/* $gender = 'm'; */
+$query = "INSERT INTO `mvn_users` (`email`, `password`, `username`, `age`, `gender`) VALUES ('$email1', '". mobileMavenhash($pwd1) ."', '$userName', '$age', '$gender'); "   ;    
+     
+    if(mysqli_query($mysqli,$query)){
+        if (mysqli_affected_rows($mysqli) === 1){
+          $id = mysqli_insert_id($mysqli);
+            loginUser($id);
+            header ('Location: dashboard.php?justregistered=1');
+            }
+        else{
+            $errorMsg .= 'Unable to register you with our database';
+            }
+        }
+    else{
+        die("Error: " . $query . "<br/>" . mysqli_error($mysqli));
+        }
+     
+}
   
   
   return $errorMsg;
   
 }
-
-
-  
    ?>
-   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="login.php">Log In</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Member Content
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/paywalled/prime-fac/primeFac.php">Prime Factoring</a>
-          <a class="dropdown-item" href="/paywalled/temp-convert/tempConvert.php">Temp Converter</a>
-          <a class="dropdown-item" href="/paywalled/tip-calc/tipCalc.php">Tip Calculator</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="register.php">Account</a>
-        </div>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
+   <?php 
+    include "includes/nav.php";
+    ?>
+   
   <div class="container">
 
     <!-- <div class="wrapper-alert1">
@@ -200,17 +202,17 @@ function validateForm():string{
 
         <div class="option">
           <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="customRadioInline1" name="gender" value="male" class="custom-control-input">
+            <input type="radio" id="customRadioInline1" name="gender" value="m" class="custom-control-input">
             <label class="custom-control-label" for="customRadioInline1">Male</label>
           </div>
 
           <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="customRadioInline2" name="gender" value="female" class="custom-control-input">
+            <input type="radio" id="customRadioInline2" name="gender" value="f" class="custom-control-input">
             <label class="custom-control-label" for="customRadioInline2">Female</label>
           </div>
 
           <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="customRadioInline3" name="gender" value="other" class="custom-control-input">
+            <input type="radio" id="customRadioInline3" name="gender" value="o" class="custom-control-input">
             <label class="custom-control-label" for="customRadioInline3">Other</label>
           </div>
         </div>

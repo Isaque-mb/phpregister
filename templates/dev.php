@@ -1,5 +1,23 @@
 <?php 
-include 'includes/config.php';
+include '../includes/config.php';
+include '../includes/db.php';
+
+$email = 'abc@123.com';
+$password = "mypassword";
+$userName = "foobar";
+$age = 51;
+$gender = "m";
+
+
+$query = "INSERT INTO `mvn_users` (`email`, `password`, `username`, `age`, `gender`) VALUES ('$email', '$password', '$userName', '$age', '$gender')";
+
+if (mysqli_query($mysqli,$query)) {
+  echo "<br />New Record created successfully created";
+}
+else {
+  die( "<br /> Error:".$query."<br />".mysqli_error($mysqli) );
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -13,17 +31,15 @@ include 'includes/config.php';
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans+Condensed:300" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
-    <title>Home MM</title>
+    <title>Dev</title>
   </head>
   <body>
   <?php 
-  include 'includes/nav.php';
+  include '../includes/nav.html';
    ?>
   
   <div class="container">
-    <div class="logo-index flex">
-      <img src="images/mobilleM.jpeg" class="img-fluid logo" alt="Marvin Logo" >  
-    </div>
+
   </div>    
   </body>
   

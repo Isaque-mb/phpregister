@@ -17,7 +17,7 @@ include '../includes/config.php';
 
 <body>
   <?php 
-   include '../includes/nav.html';
+   include '../includes/nav.php';
    ?>
   <div class="wrapper">
     <div class="title">

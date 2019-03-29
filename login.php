@@ -1,6 +1,7 @@
 <?php 
 include 'includes/config.php';
-$bFormSubmitted = isset($_POST['username']) && strlen($_POST['username']) > 0;
+include 'includes/db.php';
+$bFormSubmitted = isset($_POST['email']);
 
 $num1 = rand(1,10);
 $num2 = rand(1,10);
@@ -31,22 +32,20 @@ $antiBotAnswer = $num1 + $num2;
 
 function validateForm():string{
   
-  global $debug, $userName, $num1, $num2;
+  global $debug, $userName, $num1, $num2, $mysqli;
   $errorMsg = '';
-  $userName = 'Jane Doe';
+  $email = 'OOOOOF';
   $pwd = 'foofoofoo';
   
   if ((int) $_POST['antibotq'] !== $_SESSION['robosolution']) {
     $errorMsg .= 'You seem to be a robot';
   }
-  
-  // username
-  if (isset($_POST['username']) && strlen($_POST['username']) > 4)
-    $userName = trim($_POST['username']);
+
+  if (isset($_POST['email']) && strlen($_POST['email']) > 4)
+    $email = trim($_POST['email']);
   else
-    $errorMsg .= 'Please enter a username that is at least 5 characters long';  
-    
-  // pwd
+    $errorMsg .= 'Please enter a valid email';  
+  
   if (strlen($_POST['password']) > 5 )
   $pwd = trim($_POST['password']);
   else
@@ -54,11 +53,38 @@ function validateForm():string{
   
   
   if ($debug) {
-  echo '<br /> Your Username is '.$userName.'<br />';
+  echo '<br /> Your Email is '.$email.'<br />';
   echo '<br /> Your Pwd is '.$pwd.'<br />';
 }
   
-  
+  if (strlen($errorMsg) === 0) {
+    
+    $pwd = mobileMavenHash($pwd);
+    $sql = "SELECT `userId` FROM `mvn_users` WHERE `email` = '$email' and `password` = '$pwd' LIMIT 1";
+    print_r($sql);
+    $result = mysqli_query($mysqli, $sql);
+    print('<br /> Num rows '.mysqli_num_rows($result));
+    $row = mysqli_fetch_array($result);
+    // var_dump($row)
+    $id = $row['userId'];
+    // echo('id'. $id);
+    
+    
+    if ($result) {
+      if (mysqli_num_rows($result) === 1) {
+        loginUser($id);
+        header('Location: dashboard.php');
+      }
+      else {
+        $errorMsg .= 'Unable to login with the credentials you provided';
+      }
+    }
+    else {
+      die("Error: ".$query."<br/>". mysqli_error($mysqli));
+    }
+    
+    
+  }
 
 
   return $errorMsg;
@@ -69,12 +95,12 @@ function validateForm():string{
    ?>
    
    <?php 
-    include 'includes/nav.html';
+    include 'includes/nav.php';
     ?>
    
   <div class="container">
 
-    <div class="wrapper-alert1">
+    <!-- <div class="wrapper-alert1">
       <div class="alert alert-danger" id="error" role="alert">
       </div>
     </div>
@@ -84,7 +110,7 @@ function validateForm():string{
       <div class="alert alert-success" id="success" role="alert">
         <h6>Proceeding ...</h6>
       </div>
-    </div>
+    </div> -->
 
 
     <div class="logo">
@@ -112,9 +138,9 @@ function validateForm():string{
           <div class="order-2 order-md-1 mt-3 mt-md-0">
           <div class=" input-group input-group-sm mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-sm">Username</span>
+              <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>
             </div>
-            <input type="text" name="username" id="username" class="form-control" />
+            <input type="text" name="email" id="email" class="form-control" />
           </div>
 
           <div class="input-group input-group-sm mb-3">
@@ -130,12 +156,9 @@ function validateForm():string{
             </div>
             <input type="number" name="antibotq" id="antibotq" class="form-control" />
           </div>
-          
+    
 
-          
-        <div class="flex">
           <input type="submit" class="btn btn-danger mt-3" id="submitbttn"/>
-        </div>
       </form>
     </div>
     </div>
